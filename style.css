@@ -1,0 +1,20 @@
+body {
+  background-color: pink;
+}
+
+#game {
+  background-color: white;
+  height: 500px;
+  width: 500px;
+  border: 1px solid black;
+  position: relative;
+}
+
+.circle {
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+  background-color: #ABCDEF;
+  position: absolute;
+  cursor: pointer;
+}
