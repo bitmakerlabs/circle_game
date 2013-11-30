@@ -1,13 +1,16 @@
+var duration = 30
+var initialCircles = 20
+
 $(document).ready(function() {
-  window.game = new Game(10, 10);
+  window.game = new Game(initialCircles, duration);
   window.game.start();
 });
 
 function Circle() {
-  this.x = Math.random() * 450;
-  this.y = Math.random() * 450;
-  this.speed = 1000 + Math.random() * 1000;
-  this.size = 30 + Math.random() * 30;
+  this.x = Math.random() * 600;
+  this.y = Math.random() * 600;
+  this.speed = 500 + Math.random() * 1500;
+  this.size = 60 + Math.random() * 30;
   this.render = function() {
     var _this = this;
 
@@ -26,8 +29,8 @@ function Circle() {
   this.move = function() {
     var _this = this;
     $(this.$me).animate({
-      top: (Math.random() * 450) + "px",
-      left: (Math.random() * 450) + "px"
+      top: Math.max(((Math.random() * 600) - this.size),0) + "px",
+      left: Math.max(((Math.random() * 600) - this.size),0) + "px"
     }, {
       complete: function() {
         _this.move();
@@ -35,18 +38,27 @@ function Circle() {
       duration: this.speed
     });
   },
+//   this.kill = function() {
+//     $(this.$me).css("background-color", "red");
+//     $(this.$me)
+//     .effect({
+//       effect: "explode",
+//       complete: function() {
+//         $(this).remove();
+//         $("#score").text(window.game.score += 100);
+//     }
+//     });
+//   }
+// }
+
   this.kill = function() {
-    $(this.$me).css("background-color", "red");
-    $(this.$me).effect({
-      effect: "explode",
-      duration: 100,
-      complete: function() {
-        $(this).remove();
-        $("#score").text(window.game.score += 100);
+    $(this.$me).css("background-color", "red");  
+    $(this.$me).remove();
+    $("#score").text(window.game.score += 100);
+
     }
-    });
-  }
-}
+  };
+
 
 Circle.init = function() {
   var circle = new Circle();
@@ -67,15 +79,29 @@ function Game(circleCount, duration) {
     for (var i=0; i < this.circleCount; i++) {
       this.circles.push(Circle.init());
     }
-
+     document.getElementById("timer").innerHTML=duration + " seconds";
     setTimeout(this.stop, this.duration);
   }
 
   this.stop = function() {
-    alert("GAME OVER!");
+    alert("Game Over");
     for (var i=0; i < game.circleCount; i++) {
       $(game.circles[i].$me).remove();
     }
   }
 }
 
+var count = duration
+var counter=setInterval(timer, 990);
+
+function timer()
+{
+  count -= 1;
+  if (count <= -1)
+  {
+     clearInterval(counter);
+     //counter ended, do something here
+     return;
+  }
+  document.getElementById("timer").innerHTML=count + " seconds";
+}
