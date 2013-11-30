@@ -1,8 +1,12 @@
 circles.todo
 
-Display time Left
-
-
+Fix circle can start out of space 
 Implement circle click adds to time remaining
-Implement new circles created over time
 
+
+
+Done:
+Display time left
+Score increases relate to speed and size of circle
+Color relates to circle-size
+Implement new circles created as old destroyed

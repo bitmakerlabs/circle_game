@@ -1,5 +1,5 @@
 var duration = 30
-var initialCircles = 20
+var initialCircles = 5
 
 $(document).ready(function() {
   window.game = new Game(initialCircles, duration);
@@ -9,17 +9,21 @@ $(document).ready(function() {
 function Circle() {
   this.x = Math.random() * 600;
   this.y = Math.random() * 600;
-  this.speed = 500 + Math.random() * 1500;
-  this.size = 60 + Math.random() * 30;
+  this.speed = 1500 + Math.random() * 1500;
+  this.size = 30 + Math.random() * 70;
   this.render = function() {
     var _this = this;
 
     this.$me = $('<div class="circle"></div>');
+    if (this.size > 75) {
+        $(this.$me).css('background-color', "green")
+      }
     $(this.$me)
       .css('top', this.x)
       .css('left', this.y)
       .css('height', this.size)
       .css('width', this.size)
+      
       .on('click', function() {
         _this.kill();
       });
@@ -41,7 +45,7 @@ function Circle() {
 //   this.kill = function() {
 //     $(this.$me).css("background-color", "red");
 //     $(this.$me)
-//     .effect({
+//     .effect({ 
 //       effect: "explode",
 //       complete: function() {
 //         $(this).remove();
@@ -54,8 +58,8 @@ function Circle() {
   this.kill = function() {
     $(this.$me).css("background-color", "red");  
     $(this.$me).remove();
-    $("#score").text(window.game.score += 100);
-
+    $("#score").text(window.game.score += Math.round(10000000 / (this.speed * this.size) ) );
+    this.circles.push(Circle.init());
     }
   };
 
