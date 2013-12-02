@@ -1,12 +1,11 @@
 circles.todo
 
-Fix circle can start out of space 
 Implement circle click adds to time remaining
-
-
 
 Done:
 Display time left
 Score increases relate to speed and size of circle
 Color relates to circle-size
 Implement new circles created as old destroyed
+Circles can no longer originate out of space
+Game over now works correctly

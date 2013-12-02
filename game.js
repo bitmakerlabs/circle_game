@@ -1,16 +1,17 @@
-var duration = 30
-var initialCircles = 5
+var duration = 15
+var initialCircles = 20
 
 $(document).ready(function() {
   window.game = new Game(initialCircles, duration);
   window.game.start();
 });
 
+var newCircles = 0
 function Circle() {
-  this.x = Math.random() * 600;
-  this.y = Math.random() * 600;
-  this.speed = 1500 + Math.random() * 1500;
+  this.speed = 500 + Math.random() * 1500;
   this.size = 30 + Math.random() * 70;
+  this.x = Math.max(Math.random() * (600 - this.size) ,0);
+  this.y = Math.max(Math.random() * (600 - this.size) ,0);
   this.render = function() {
     var _this = this;
 
@@ -33,8 +34,8 @@ function Circle() {
   this.move = function() {
     var _this = this;
     $(this.$me).animate({
-      top: Math.max(((Math.random() * 600) - this.size),0) + "px",
-      left: Math.max(((Math.random() * 600) - this.size),0) + "px"
+      top: Math.max(((Math.random() * (600 - this.size)) ),0) + "px",
+      left: Math.max(((Math.random() * (600 - this.size)) ),0) + "px"
     }, {
       complete: function() {
         _this.move();
@@ -55,11 +56,14 @@ function Circle() {
 //   }
 // }
 
+
   this.kill = function() {
     $(this.$me).css("background-color", "red");  
     $(this.$me).remove();
     $("#score").text(window.game.score += Math.round(10000000 / (this.speed * this.size) ) );
-    this.circles.push(Circle.init());
+    $(Circle.init());
+    newCircles += 1;
+    
     }
   };
 
@@ -88,10 +92,11 @@ function Game(circleCount, duration) {
   }
 
   this.stop = function() {
+    $("#game").empty()
     alert("Game Over");
-    for (var i=0; i < game.circleCount; i++) {
-      $(game.circles[i].$me).remove();
-    }
+    // for (var i=0; i < game.circleCount; i++) {
+    //   $(game.circles[i].$me).remove();
+    // }
   }
 }
 
