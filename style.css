@@ -21,6 +21,6 @@ body {
   cursor: pointer;
 }
 
-      if (this.size > 50) {
-      .css('background-color', "green");
-        }
+h3{
+  color: #333;
+}
