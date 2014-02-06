@@ -9,7 +9,7 @@ $(document).ready(function() {
 
 var newCircles = 0
 function Circle() {
-  this.speed = 1500 + Math.random() * 1500;
+  this.speed = 500 + Math.random() * 1500;
   this.size = 30 + Math.random() * 70;
   this.x = Math.max(Math.random() * (600 - this.size) ,0);
   this.y = Math.max(Math.random() * (600 - this.size) ,0);

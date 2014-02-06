@@ -1,5 +1,6 @@
 body {
-  background-color: tomato;
+  background-color: lightblue;
+  text-align: center
 }
 
 #game {
@@ -8,6 +9,7 @@ body {
   width: 600px;
   border: 1px solid black;
   position: relative;
+  margin: auto;
 }
 
 .circle {
