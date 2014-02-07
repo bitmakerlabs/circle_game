@@ -1,26 +1,52 @@
 body {
+  font-family: sans-serif;
   background-color: lightblue;
   text-align: center
-}
+}  
 
 #game {
   background-color: white;
   height: 600px;
-  width: 600px;
-  border: 1px solid black;
+  width: 800px;
+  border: 2px solid black;
   position: relative;
   margin: auto;
+  line-height: 550px;
+  font-size: 96px;
+/*  color: rgb(31, 31, 205) */
+}
+
+#instructions {
+  height: 100px;
+  width: 800px;
+  position: relative;
+  margin: auto;
+  text-align: left
 }
 
 .circle {
   height: 50px;
   width: 50px;
   border-radius: 100%;
-  background-color: red;
+ /* background-color: rgb(219, 15, 15);*/
+ /* background: radial-gradient(rgb(219, 15, 15) 30%, green 50%, yellow 20%);*/
+ background: radial-gradient(circle,red 25%, green 65%, blue 10%);
   position: absolute;
   cursor: pointer;
 }
 
-h3{
+h1{
+  font-size: 72px;
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+
+h2{
   color: #333;
+  text-align: center
+}
+
+li{
+    list-style-type: none;
+
 }

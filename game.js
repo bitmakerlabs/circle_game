@@ -1,4 +1,4 @@
-var duration = 15
+var duration = 20
 var initialCircles = 20
 var count = duration
 
@@ -11,18 +11,15 @@ var newCircles = 0
 function Circle() {
   this.speed = 500 + Math.random() * 1500;
   this.size = 30 + Math.random() * 70;
-  this.x = Math.max(Math.random() * (600 - this.size) ,0);
+  this.x = Math.max(Math.random() * (800 - this.size) ,0);
   this.y = Math.max(Math.random() * (600 - this.size) ,0);
   this.render = function() {
     var _this = this;
 
     this.$me = $('<div class="circle"></div>');
-    if (this.size > 75) {
-        $(this.$me).css('background-color', 'green')
-      }
     $(this.$me)
-      .css('top', this.x)
-      .css('left', this.y)
+      .css('top', this.y)
+      .css('left', this.x)
       .css('height', this.size)
       .css('width', this.size)
       
@@ -36,7 +33,7 @@ function Circle() {
     var _this = this;
     $(this.$me).animate({
       top: Math.max(((Math.random() * (600 - this.size)) ),0) + 'px',
-      left: Math.max(((Math.random() * (600 - this.size)) ),0) + 'px'
+      left: Math.max(((Math.random() * (800 - this.size)) ),0) + 'px'
     }, {
       complete: function() {
         _this.move();
@@ -79,8 +76,8 @@ function Game(circleCount, duration) {
   }
 
   this.stop = function() {
-    $('#game').empty()
-    alert('Game Over');
+    // $('#game').empty()
+    $('#game').text('Game Over');
   }
 }
 
