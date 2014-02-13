@@ -1,12 +1,18 @@
-var duration = 20
-var initialCircles = 20
-var count = duration
+  var duration = 15 //intializes game duration
+  var initialCircles = 20
+  var count = 0 //initalizes time left
 
 $(document).ready(function() {
-  window.game = new Game(initialCircles, duration);
-  window.game.start();
-});
-
+  $('#timer').html(duration);
+  $('button').on('click', function(){ 
+  $('#game').empty();
+  $('#timer').html(duration);
+    window.game = new Game(initialCircles, duration);
+    window.game.start();
+    $('button').attr("disabled", true).text("Game In Progress..");
+  });
+})
+  
 var newCircles = 0
 function Circle() {
   this.speed = 500 + Math.random() * 1500;
@@ -62,6 +68,7 @@ Circle.init = function() {
 
 
 function Game(circleCount, duration) {
+  count += duration
   this.circleCount = circleCount;
   this.duration = duration * 1000;
   this.circles = [];
@@ -72,23 +79,22 @@ function Game(circleCount, duration) {
     for (var i=0; i < this.circleCount; i++) {
       this.circles.push(Circle.init());
     }
-     timer()
+     var counter = setInterval(timer, 990);
+
+      function timer()
+      {
+        $('#timer').html(count);
+        if (count <= 0 ){ 
+          window.game.stop();
+          clearInterval(counter);
+        }
+        count -= 1;
+      }
   }
 
   this.stop = function() {
-    // $('#game').empty()
     $('#game').text('Game Over');
+    $('button').removeAttr("disabled").text("Start New Game");
   }
 }
 
-var counter = setInterval(timer, 990);
-
-function timer()
-{
-  $('#timer').html(count + ' seconds');
-  if (count <= 0 ){ 
-    window.game.stop();
-    clearInterval(counter);
-  }
-  count -= 1;
-}
