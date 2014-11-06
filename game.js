@@ -4,7 +4,7 @@
 
 $(document).ready(function() {
   $('#timer').html(duration);
-  $('button').on('click', function(){ 
+  $('button').on('click', function(){
   $('#game').empty();
   $('#timer').html(duration);
     window.game = new Game(initialCircles, duration);
@@ -12,7 +12,7 @@ $(document).ready(function() {
     $('button').attr("disabled", true).text("Game In Progress..");
   });
 })
-  
+
 var newCircles = 0
 function Circle() {
   this.speed = 500 + Math.random() * 1500;
@@ -28,7 +28,7 @@ function Circle() {
       .css('left', this.x)
       .css('height', this.size)
       .css('width', this.size)
-      
+
       .on('click', function() {
         _this.kill();
       });
@@ -54,7 +54,7 @@ function Circle() {
     count +=1
     $(Circle.init());
     newCircles += 1;
-    
+
     }
   };
 
@@ -84,7 +84,7 @@ function Game(circleCount, duration) {
       function timer()
       {
         $('#timer').html(count);
-        if (count <= 0 ){ 
+        if (count <= 0 ){
           window.game.stop();
           clearInterval(counter);
         }
@@ -95,6 +95,13 @@ function Game(circleCount, duration) {
   this.stop = function() {
     $('#game').text('Game Over');
     $('button').removeAttr("disabled").text("Start New Game");
+    if (hiscore() < this.score) {
+      document.cookie="hiscore=" + this.score;
+    }
+    $('#hiscore').text(hiscore())
   }
 }
 
+function hiscore() {
+  return $.grep(document.cookie.split("; "), function (e) { return /^hiscore=/.test(e) })[0].split('=')[1]
+}
