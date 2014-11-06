@@ -103,5 +103,11 @@ function Game(circleCount, duration) {
 }
 
 function hiscore() {
-  return $.grep(document.cookie.split("; "), function (e) { return /^hiscore=/.test(e) })[0].split('=')[1]
+  if (document.cookie) {
+    var cookieMatches = $.grep(document.cookie.split("; "), function (e) { return /^hiscore=/.test(e) })
+    if (cookieMatches.length) {
+      var keyValPair = cookieMatches[0].split('=')
+      if (keyValPair.length == 2) return keyValPair[1]
+    }
+  }
 }
