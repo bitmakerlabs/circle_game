@@ -3,6 +3,7 @@
   var count = 0 //initalizes time left
 
 $(document).ready(function() {
+  $('#hiscore').html(hiscore() || 0);
   $('#timer').html(duration);
   $('button').on('click', function(){
   $('#game').empty();
