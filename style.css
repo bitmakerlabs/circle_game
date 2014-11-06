@@ -1,8 +1,12 @@
+p,li {
+  font-size: 18px;
+}
+
 body {
   font-family: sans-serif;
   background-color: lightblue;
   text-align: center
-}  
+}
 
 #game {
   background-color: white;
@@ -10,11 +14,13 @@ body {
   width: 800px;
   border: 2px solid black;
   position: relative;
-  margin: auto;
+  margin: 15px auto 5px;
   line-height: 550px;
-  font-size: 96px;
-/*  color: rgb(31, 31, 205) */
-}
+  font-size: 128px;
+  padding: 10px;
+  border-radius: 7px;
+  border: 3px solid;
+  }
 
 #instructions {
   height: 100px;
@@ -28,9 +34,7 @@ body {
   height: 50px;
   width: 50px;
   border-radius: 100%;
- /* background-color: rgb(219, 15, 15);*/
- /* background: radial-gradient(rgb(219, 15, 15) 30%, green 50%, yellow 20%);*/
- background: radial-gradient(circle,red 25%, green 65%, blue 10%);
+  background: radial-gradient(circle,red 25%, green 65%, blue 10%);
   position: absolute;
   cursor: pointer;
 }
@@ -56,4 +60,14 @@ button {
   font-size: 24px;
   margin-top: 30px;
   margin-bottom: 30px;
+  background-color: #fff;
+  border: 3px solid;
+  padding: 10px;
+  border-radius: 7px;
 }
+
+button:hover {
+  transition: all 0.5s;
+  color: rgb(0, 0, 200);
+}
+

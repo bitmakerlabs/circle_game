@@ -94,7 +94,7 @@ function Game(circleCount, duration) {
   }
 
   this.stop = function() {
-    $('#game').text('Game Over');
+    $('#game').text('GAME OVER');
     $('button').removeAttr("disabled").text("Start New Game");
     if (hiscore() < this.score) {
       document.cookie="hiscore=" + this.score;
