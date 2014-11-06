@@ -1,4 +1,4 @@
-  var duration = 15 //intializes game duration
+  var duration = 10 //intializes game duration
   var initialCircles = 20
   var count = 0 //initalizes time left
 
@@ -16,8 +16,8 @@ $(document).ready(function() {
 
 var newCircles = 0
 function Circle() {
-  this.speed = 500 + Math.random() * 1500;
-  this.size = 30 + Math.random() * 70;
+  this.speed = 750 + Math.random() * 1500;
+  this.size = 30 + Math.random() * 50;
   this.x = Math.max(Math.random() * (800 - this.size) ,0);
   this.y = Math.max(Math.random() * (600 - this.size) ,0);
   this.render = function() {
@@ -30,7 +30,7 @@ function Circle() {
       .css('height', this.size)
       .css('width', this.size)
 
-      .on('click', function() {
+      .on('mousedown', function() {
         _this.kill();
       });
 
@@ -52,7 +52,7 @@ function Circle() {
   this.kill = function() {
     $(this.$me).remove();
     $('#score').text(window.game.score += Math.round(10000000 / (this.speed * this.size) ) );
-    count +=1
+    count +=0.5
     $(Circle.init());
     newCircles += 1;
 
@@ -84,7 +84,7 @@ function Game(circleCount, duration) {
 
       function timer()
       {
-        $('#timer').html(count);
+        $('#timer').html(Math.round(count));
         if (count <= 0 ){
           window.game.stop();
           clearInterval(counter);
