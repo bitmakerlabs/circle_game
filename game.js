@@ -111,4 +111,5 @@ function hiscore() {
       if (keyValPair.length == 2) return keyValPair[1]
     }
   }
+  return 0
 }
