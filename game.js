@@ -3,7 +3,8 @@ $(document).ready(function() {
   window.game.start();
 });
 
-function Circle() {
+function Circle(game) {
+  this.game = game;
   this.x = Math.random() * 450;
   this.y = Math.random() * 450;
   this.diameter = 30 + Math.random() * 50;
@@ -39,21 +40,23 @@ function Circle() {
   };
 
   this.kill = function() {
+    var _this = this;
+
     this.$me.css('background-color', 'red')
       .effect({
         effect: 'explode',
         duration: 100,
         complete: function() {
           $(this).remove();
-          window.game.increaseScore();
+          _this.game.increaseScore();
         },
         queue: false
     });
   };
 }
 
-Circle.init = function() {
-  var circle = new Circle();
+Circle.init = function(game) {
+  var circle = new Circle(game);
   circle.render();
   circle.move();
   return circle;
@@ -75,11 +78,11 @@ function Game(circleCount, duration) {
 
   this.start = function() {
     for (var i=0; i < this.circleCount; i++) {
-      this.circles.push(Circle.init());
+      this.circles.push(Circle.init(this));
     }
 
     $("#score").text(this.score);
-    setTimeout(this.stop.bind(this) , this.duration);
+    setTimeout(this.stop.bind(this), this.duration);
   };
 
   this.stop = function() {
