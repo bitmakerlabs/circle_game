@@ -69,6 +69,10 @@ function Game(circleCount, duration) {
     $("#score").text(this.score += 100);
   }
 
+  this.resetScore = function() {
+    $("#score").text(0);
+  }
+
   this.start = function() {
     for (var i=0; i < this.circleCount; i++) {
       this.circles.push(Circle.init());
@@ -84,5 +88,6 @@ function Game(circleCount, duration) {
       this.circles[i].$me.remove();
     }
     this.circles = [];
+    this.resetScore();
   };
 }
