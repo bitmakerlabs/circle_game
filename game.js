@@ -1,14 +1,13 @@
-var duration = 10; //intializes game duration
-var initialCircles = 10;
-var count = 0; //initalizes time left
+var duration = 10; //initializes game duration
+var INITIAL_CIRCLES = 5;
+var count = 0; //used to track time remaining
 
 $(document).ready(function() {
   $('#hiscore').html(hiscore() || 0);
   $('#timer').html(duration);
-  $('button').on('click', function(){
-  $('#game').empty();
-  $('#timer').html(duration);
-    window.game = new Game(initialCircles, duration);
+  $('button').on('click', function() {
+    $('#game').empty();
+    window.game = new Game(INITIAL_CIRCLES, duration);
     window.game.start();
     $('button').attr("disabled", true).text("Game In Progress..");
   });
@@ -24,7 +23,7 @@ function Circle() {
     var _this = this;
 
     this.$me = $('<div class="circle"></div>');
-    $(this.$me)
+    this.$me
       .css('top', this.y)
       .css('left', this.x)
       .css('height', this.size)
@@ -53,7 +52,7 @@ function Circle() {
     $(this.$me).remove();
     $('#score').text(window.game.score += Math.round(10000000 / (this.speed * this.size) ) );
     count += 0.5;
-    $(Circle.init());
+    Circle.init();
     newCircles += 1;
   };
 }
@@ -107,6 +106,6 @@ function hiscore() {
       var keyValPair = cookieMatches[0].split('=');
       if (keyValPair.length == 2) return keyValPair[1];
     }
-  }
+  };
   return 0;
 }
