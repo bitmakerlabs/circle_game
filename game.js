@@ -52,22 +52,22 @@ function Circle() {
   this.kill = function() {
     $(this.$me).remove();
     $('#score').text(window.game.score += Math.round(10000000 / (this.speed * this.size) ) );
-    count += 0.5
+    count += 0.5;
     $(Circle.init());
     newCircles += 1;
-  }
-};
+  };
+}
 
 Circle.init = function() {
   var circle = new Circle();
   circle.render();
   circle.move();
   return circle;
-}
+};
 
 
 function Game(circleCount, duration) {
-  count += duration
+  count += duration;
   this.circleCount = circleCount;
   this.duration = duration * 1000;
   this.circles = [];
@@ -88,7 +88,7 @@ function Game(circleCount, duration) {
       }
       count -= 1;
     }
-  }
+  };
 
   this.stop = function() {
     $('#game').text('GAME OVER');
@@ -96,17 +96,17 @@ function Game(circleCount, duration) {
     if (hiscore() < this.score) {
       document.cookie="hiscore=" + this.score;
     }
-    $('#hiscore').text(hiscore())
-  }
+    $('#hiscore').text(hiscore());
+  };
 }
 
 function hiscore() {
   if (document.cookie) {
     var cookieMatches = $.grep(document.cookie.split("; "), function (e) { return /^hiscore=/.test(e) })
     if (cookieMatches.length) {
-      var keyValPair = cookieMatches[0].split('=')
-      if (keyValPair.length == 2) return keyValPair[1]
+      var keyValPair = cookieMatches[0].split('=');
+      if (keyValPair.length == 2) return keyValPair[1];
     }
   }
-  return 0
+  return 0;
 }
