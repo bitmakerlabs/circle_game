@@ -20,7 +20,7 @@ body {
   padding: 10px;
   border-radius: 7px;
   border: 3px solid;
-  }
+}
 
 #instructions {
   height: 100px;
@@ -37,6 +37,7 @@ body {
   background: radial-gradient(circle,red 25%, green 65%, blue 10%);
   position: absolute;
   cursor: pointer;
+  will-change: transform;
 }
 
 h1{
@@ -52,8 +53,8 @@ h2{
 }
 
 li{
-    list-style-type: none;
-    margin-left: 100px;
+  list-style-type: none;
+  margin-left: 100px;
 }
 
 button {

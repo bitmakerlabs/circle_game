@@ -1,6 +1,6 @@
-  var duration = 10 //intializes game duration
-  var initialCircles = 20
-  var count = 0 //initalizes time left
+var duration = 10 //intializes game duration
+var initialCircles = 10
+var count = 0 //initalizes time left
 
 $(document).ready(function() {
   $('#hiscore').html(hiscore() || 0);
@@ -52,13 +52,11 @@ function Circle() {
   this.kill = function() {
     $(this.$me).remove();
     $('#score').text(window.game.score += Math.round(10000000 / (this.speed * this.size) ) );
-    count +=0.5
+    count += 0.5
     $(Circle.init());
     newCircles += 1;
-
     }
   };
-
 
 Circle.init = function() {
   var circle = new Circle();
@@ -77,13 +75,12 @@ function Game(circleCount, duration) {
 
   this.start = function() {
     $('#score').text(this.score);
-    for (var i=0; i < this.circleCount; i++) {
+    for (var i = 0; i < this.circleCount; i++) {
       this.circles.push(Circle.init());
     }
-     var counter = setInterval(timer, 990);
+    var counter = setInterval(timer, 990);
 
-      function timer()
-      {
+      function timer() {
         $('#timer').html(Math.round(count));
         if (count <= 0 ){
           window.game.stop();
