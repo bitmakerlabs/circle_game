@@ -1,6 +1,6 @@
-var duration = 10 //intializes game duration
-var initialCircles = 10
-var count = 0 //initalizes time left
+var duration = 10; //intializes game duration
+var initialCircles = 10;
+var count = 0; //initalizes time left
 
 $(document).ready(function() {
   $('#hiscore').html(hiscore() || 0);
@@ -14,7 +14,7 @@ $(document).ready(function() {
   });
 })
 
-var newCircles = 0
+var newCircles = 0;
 function Circle() {
   this.speed = 750 + Math.random() * 1500;
   this.size = 30 + Math.random() * 50;
@@ -24,11 +24,12 @@ function Circle() {
     var _this = this;
 
     this.$me = $('<div class="circle"></div>');
-    $(this.$me)
-      .css('top', this.y)
-      .css('left', this.x)
-      .css('height', this.size)
-      .css('width', this.size)
+    $(this.$me).css({
+                    "top": "this.y",
+                    "left": "this.x",
+                    "height": "this.size",
+                    "width": "this.size"
+                    })
 
       .on('mousedown', function() {
         _this.kill();
