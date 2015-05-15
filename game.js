@@ -12,7 +12,7 @@ $(document).ready(function() {
     window.game.start();
     $('button').attr("disabled", true).text("Game In Progress..");
   });
-})
+});
 
 var newCircles = 0;
 function Circle() {
@@ -24,12 +24,11 @@ function Circle() {
     var _this = this;
 
     this.$me = $('<div class="circle"></div>');
-    $(this.$me).css({
-                    "top": "this.y",
-                    "left": "this.x",
-                    "height": "this.size",
-                    "width": "this.size"
-                    })
+    $(this.$me)
+      .css('top', this.y)
+      .css('left', this.x)
+      .css('height', this.size)
+      .css('width', this.size)
 
       .on('mousedown', function() {
         _this.kill();
@@ -56,8 +55,8 @@ function Circle() {
     count += 0.5
     $(Circle.init());
     newCircles += 1;
-    }
-  };
+  }
+};
 
 Circle.init = function() {
   var circle = new Circle();
@@ -81,14 +80,14 @@ function Game(circleCount, duration) {
     }
     var counter = setInterval(timer, 990);
 
-      function timer() {
-        $('#timer').html(Math.round(count));
-        if (count <= 0 ){
-          window.game.stop();
-          clearInterval(counter);
-        }
-        count -= 1;
+    function timer() {
+      $('#timer').html(Math.round(count));
+      if (count <= 0 ){
+        window.game.stop();
+        clearInterval(counter);
       }
+      count -= 1;
+    }
   }
 
   this.stop = function() {
