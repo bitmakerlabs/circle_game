@@ -4,8 +4,9 @@ var count = 0; //used to track time remaining
 
 $(document).ready(function() {
   $('#hiscore').html(hiscore() || 0);
-  $('#timer').html(INITIAL_DURATION);
+  $('#timer').html(Number(INITIAL_DURATION).toFixed(1));
   $('button').on('click', function() {
+    $('#game').empty();
     window.game = new Game(INITIAL_CIRCLES, INITIAL_DURATION);
     window.game.start();
     $('button').attr("disabled", true).text("Game In Progress..");
@@ -14,9 +15,9 @@ $(document).ready(function() {
 
 function Circle() {
   this.speed = 750 + Math.random() * 1500;
-  this.size = 30 + Math.random() * 50;
-  this.x = Math.max(Math.random() * (800 - this.size) ,0);
-  this.y = Math.max(Math.random() * (600 - this.size) ,0);
+  this.size = 50 + Math.round(Math.random() * 40);
+  this.x = Math.round(Math.random() * (800 - this.size));
+  this.y = Math.round(Math.random() * (600 - this.size));
   this.render = function() {
     var _this = this;
 
@@ -35,9 +36,9 @@ function Circle() {
   },
   this.move = function() {
     var _this = this;
-    $(this.$me).animate({
-      top: Math.max(((Math.random() * (600 - this.size)) ),0) + 'px',
-      left: Math.max(((Math.random() * (800 - this.size)) ),0) + 'px'
+    this.$me.animate({
+      top: Math.round(Math.random() * (600 - this.size)) + 'px',
+      left: Math.round(Math.random() * (800 - this.size)) + 'px'
     }, {
       complete: function() {
         _this.move();
@@ -74,15 +75,15 @@ function Game(circleCount, duration) {
     for (var i = 0; i < this.circleCount; i++) {
       this.circles.push(Circle.init());
     }
-    var counter = setInterval(timer, 990);
+    var counter = setInterval(timer, 100);
 
     function timer() {
-      $('#timer').html(Math.round(count));
-      if (count <= 0) {
+      $('#timer').html(Number(count).toFixed(1));
+      if (count <= 0.1) {
         window.game.stop();
         clearInterval(counter);
       }
-      count -= 1;
+      count -= 0.1;
     }
   };
 
