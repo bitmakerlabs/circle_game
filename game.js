@@ -92,7 +92,12 @@ function Game(circleCount, duration) {
 
   this.pause = function() {
     gamePaused = !gamePaused;
-    console.log('gamePaused',gamePaused)
+    $('.circle').toggle();
+    if (gamePaused === true) {
+      $('button').text("---- PAUSED ----");
+    } else {
+      $('button').text("Game In Progress..");
+    }
   };
 
   this.stop = function() {
@@ -115,3 +120,11 @@ function hiscore() {
   };
   return 0;
 }
+
+document.onkeydown = function (e) {
+  switch (e.keyCode) {
+    case 32: //spacebar
+      window.game.pause()
+    break;
+  }
+};
