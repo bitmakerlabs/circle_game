@@ -1,6 +1,6 @@
 var INITIAL_DURATION = 10; //initializes game length in seconds
 var INITIAL_CIRCLES = 25;
-var count = 0; //used to track time remaining
+var timeLeft = 0;
 
 $(document).ready(function() {
   $('#hiscore').html(hiscore() || 0);
@@ -15,17 +15,17 @@ $(document).ready(function() {
 
 function Circle() {
   this.speed = 750 + Math.random() * 1000; //lower is faster
-  this.size = 50 + Math.round(Math.random() * 40);
-  this.x = Math.round(Math.random() * (800 - this.size));
-  this.y = Math.round(Math.random() * (600 - this.size));
+  this.diameter = 50 + Math.round(Math.random() * 40);
+  this.x = Math.round(Math.random() * (800 - this.diameter));
+  this.y = Math.round(Math.random() * (600 - this.diameter));
   this.render = function() {
     var _this = this;
 
     this.$me = $('<div class="circle"></div>')
       .css('top', this.y)
       .css('left', this.x)
-      .css('height', this.size)
-      .css('width', this.size)
+      .css('height', this.diameter)
+      .css('width', this.diameter)
 
       .on('mousedown', function() {
         _this.kill();
@@ -36,8 +36,8 @@ function Circle() {
   this.move = function() {
     var _this = this;
     this.$me.animate({
-      top: Math.round(Math.random() * (600 - this.size)) + 'px',
-      left: Math.round(Math.random() * (800 - this.size)) + 'px'
+      top: Math.round(Math.random() * (600 - this.diameter)) + 'px',
+      left: Math.round(Math.random() * (800 - this.diameter)) + 'px'
     }, {
       complete: function() {
         _this.move();
@@ -49,8 +49,8 @@ function Circle() {
 
   this.kill = function() {
     $(this.$me).remove();
-    $('#score').text(window.game.score += Math.round(10000000 / (this.speed * this.size) ) );
-    count += 0.5;
+    $('#score').text(window.game.score += Math.round(10000000 / (this.speed * this.diameter) ) );
+    timeLeft += 0.5;
     Circle.init();
   };
 }
@@ -64,7 +64,7 @@ Circle.init = function() {
 
 
 function Game(circleCount, duration) {
-  count += duration;
+  timeLeft += duration;
   this.circleCount = circleCount;
   this.duration = duration * 1000;
   this.circles = [];
@@ -78,12 +78,12 @@ function Game(circleCount, duration) {
     var counter = setInterval(timer, 100);
 
     function timer() {
-      $('#timer').html(Number(count).toFixed(1));
-      if (count <= 0.1) {
+      $('#timer').html(Number(timeLeft).toFixed(1));
+      if (timeLeft <= 0.1) {
         window.game.stop();
         clearInterval(counter);
       }
-      count -= 0.1;
+      timeLeft -= 0.1;
     }
   };
 
