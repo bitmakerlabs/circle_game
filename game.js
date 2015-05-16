@@ -1,6 +1,7 @@
 var INITIAL_DURATION = 10; //initializes game length in seconds
 var INITIAL_CIRCLES = 25;
 var timeLeft = 0;
+var gamePaused = false;
 
 $(document).ready(function() {
   $('#hiscore').html(hiscore() || 0);
@@ -79,12 +80,19 @@ function Game(circleCount, duration) {
 
     function timer() {
       $('#timer').html(Number(timeLeft).toFixed(1));
-      if (timeLeft <= 0.1) {
+      if (timeLeft <= 0.1 ) {
         window.game.stop();
         clearInterval(counter);
       }
-      timeLeft -= 0.1;
+      if (gamePaused === false) {
+        timeLeft -= 0.1;
+      }
     }
+  };
+
+  this.pause = function() {
+    gamePaused = !gamePaused;
+    console.log('gamePaused',gamePaused)
   };
 
   this.stop = function() {
