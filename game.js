@@ -2,17 +2,25 @@ var INITIAL_DURATION = 10; //initializes game length in seconds
 var INITIAL_CIRCLES = 25;
 var timeLeft = 0;
 var gamePaused = false;
+var gameRunning = false;
 
 $(document).ready(function() {
   $('#hiscore').html(hiscore() || 0);
   $('#timer').html(Number(INITIAL_DURATION).toFixed(1));
   $('button').on('click', function() {
-    $('#game').empty();
-    window.game = new Game(INITIAL_CIRCLES, INITIAL_DURATION);
-    window.game.start();
-    $('button').attr("disabled", true).text("Game In Progress..");
+    gameStateManager();
   });
 });
+
+function gameStateManager() {
+  if (gameRunning === false) {
+    $('#game').empty();
+      window.game = new Game(INITIAL_CIRCLES, INITIAL_DURATION);
+      window.game.start();
+    } else {
+      window.game.pause();
+  }
+}
 
 function Circle() {
   this.speed = 750 + Math.random() * 1000; //lower is faster
@@ -72,6 +80,8 @@ function Game(circleCount, duration) {
   this.score = 0;
 
   this.start = function() {
+    gameRunning = true;
+    $('button').text("--  Pause  --");
     $('#score').text(this.score);
     for (var i = 0; i < this.circleCount; i++) {
       this.circles.push(Circle.init());
@@ -94,15 +104,16 @@ function Game(circleCount, duration) {
     gamePaused = !gamePaused;
     $('.circle').toggle();
     if (gamePaused === true) {
-      $('button').text("---- PAUSED ----");
+      $('button').text("--  Continue  --");
     } else {
-      $('button').text("Game In Progress..");
+      $('button').text("--   Pause  --");
     }
   };
 
   this.stop = function() {
+    gameRunning = false;
     $('#game').text('GAME OVER');
-    $('button').removeAttr("disabled").text("Start New Game");
+    $('button').text("Start New Game");
     if (hiscore() < this.score) {
       document.cookie = "hiscore=" + this.score;
     }
@@ -124,7 +135,7 @@ function hiscore() {
 document.onkeydown = function (e) {
   switch (e.keyCode) {
     case 32: //spacebar
-      window.game.pause()
+      gameStateManager();
     break;
   }
 };
