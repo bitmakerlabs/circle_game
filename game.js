@@ -1,19 +1,17 @@
-var duration = 10; //initializes game duration
-var INITIAL_CIRCLES = 5;
+var INITIAL_DURATION = 10; //initializes game length in seconds
+var INITIAL_CIRCLES = 25;
 var count = 0; //used to track time remaining
 
 $(document).ready(function() {
   $('#hiscore').html(hiscore() || 0);
-  $('#timer').html(duration);
+  $('#timer').html(INITIAL_DURATION);
   $('button').on('click', function() {
-    $('#game').empty();
-    window.game = new Game(INITIAL_CIRCLES, duration);
+    window.game = new Game(INITIAL_CIRCLES, INITIAL_DURATION);
     window.game.start();
     $('button').attr("disabled", true).text("Game In Progress..");
   });
 });
 
-var newCircles = 0;
 function Circle() {
   this.speed = 750 + Math.random() * 1500;
   this.size = 30 + Math.random() * 50;
@@ -53,7 +51,6 @@ function Circle() {
     $('#score').text(window.game.score += Math.round(10000000 / (this.speed * this.size) ) );
     count += 0.5;
     Circle.init();
-    newCircles += 1;
   };
 }
 
@@ -81,7 +78,7 @@ function Game(circleCount, duration) {
 
     function timer() {
       $('#timer').html(Math.round(count));
-      if (count <= 0 ){
+      if (count <= 0) {
         window.game.stop();
         clearInterval(counter);
       }
@@ -93,7 +90,7 @@ function Game(circleCount, duration) {
     $('#game').text('GAME OVER');
     $('button').removeAttr("disabled").text("Start New Game");
     if (hiscore() < this.score) {
-      document.cookie="hiscore=" + this.score;
+      document.cookie = "hiscore=" + this.score;
     }
     $('#hiscore').text(hiscore());
   };
