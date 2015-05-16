@@ -40,6 +40,19 @@ body {
   will-change: transform;
 }
 
+.time_score {
+  width: 400px;
+  margin: auto;
+}
+
+.score_box{
+  float: left;
+}
+
+.timer_box {
+  float: right;
+}
+
 h1{
   font-size: 72px;
   margin-top: 20px;

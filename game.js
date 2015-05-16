@@ -14,15 +14,14 @@ $(document).ready(function() {
 });
 
 function Circle() {
-  this.speed = 750 + Math.random() * 1500;
+  this.speed = 750 + Math.random() * 1000; //lower is faster
   this.size = 50 + Math.round(Math.random() * 40);
   this.x = Math.round(Math.random() * (800 - this.size));
   this.y = Math.round(Math.random() * (600 - this.size));
   this.render = function() {
     var _this = this;
 
-    this.$me = $('<div class="circle"></div>');
-    this.$me
+    this.$me = $('<div class="circle"></div>')
       .css('top', this.y)
       .css('left', this.x)
       .css('height', this.size)
@@ -43,7 +42,8 @@ function Circle() {
       complete: function() {
         _this.move();
       },
-      duration: this.speed
+      duration: this.speed,
+      easing: 'linear'
     });
   },
 
